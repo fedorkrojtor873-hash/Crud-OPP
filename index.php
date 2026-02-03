@@ -9,21 +9,40 @@ $name = $_POST["name"];
 $email = $_POST["email"];
 $id = (int)$_POST["id"];
 
-if(isset($_POST["add"])){
+if (isset($_POST["add"])) {
     $foo->store($name, $email);
 }
 
-if(isset($_POST["edit"])){
+if (isset($_POST["edit"])) {
     $foo->update($name, $email);
 }
 
-if(isset($_POST["delete"])){
+if (isset($_POST["delete"])) {
     $foo->delete();
 }
 
 
-
 $allUsers = $foo->getAll();
+
+
+//Пагинация
+
+$limit = 5; // сколько записей показывать на одной странице
+
+// Текущая страница из GET-параметра ?page=номер
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+
+if ($page < 1) {
+    $page = 1; // защита от отрицательных страниц
+}
+
+// С какой записи начинать выборку
+$offset = ($page - 1) * $limit;
+
+$users = $foo->getUsersPaginated($limit, $offset);
+$totalRecords = $foo->countUsers();       // сколько всего пользователей
+$totalPages = ceil($totalRecords / $limit);
+
 ?>
 
 
@@ -57,7 +76,7 @@ $allUsers = $foo->getAll();
                 </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($allUsers as $results): ?>
+                <?php foreach ($users as $results): ?>
                     <tr>
                         <td><?= $results['id'] ?></td>
                         <td><?= $results['name'] ?></td>
@@ -82,6 +101,15 @@ $allUsers = $foo->getAll();
         </div>
     </div>
 </div>
+<nav>
+    <ul class="pagination">
+        <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+            <li class="page-item <?= ($i == $page) ? 'active' : '' ?>">
+                <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
+            </li>
+        <?php endfor; ?>
+    </ul>
+</nav>
 
 <!-- Модалка создания нового пользователя -->
 <?php include 'frontend/create.php' ?>
