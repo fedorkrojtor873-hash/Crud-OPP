@@ -18,7 +18,7 @@ if(isset($_POST["edit"])){
 }
 
 if(isset($_POST["delete"])){
-    $foo->delete($name, $email);
+    $foo->delete();
 }
 
 
@@ -65,7 +65,7 @@ $allUsers = $foo->getAll();
                         <td>
                             <a href="?id=<?php echo $results['id'] ?>" class="btn btn-success" data-bs-toggle="modal"
                                data-bs-target="#edit<?php echo $results['id'] ?>"><i class="fa fa-edit"></i></a>
-                            <a href="" class="btn btn-danger " data-bs-toggle="modal"
+                            <a href="?id=<?php echo $results['id'] ?>" class="btn btn-danger " data-bs-toggle="modal"
                                data-bs-target="#delete<?php echo $results['id'] ?>"><i class="fa fa-trash-alt"></i></a>
                         </td>
                     </tr>

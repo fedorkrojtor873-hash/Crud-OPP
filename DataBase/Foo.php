@@ -19,7 +19,8 @@ class Foo extends db
 
     public function store(string $name,  string $email): string
     {
-        return mysqli_query($this->getConnection(), "INSERT INTO users (name, email) VALUES ('$name', '$email')");
+        return mysqli_query($this->getConnection(),
+            "INSERT INTO users (name, email) VALUES ('$name', '$email')");
     }
 
     public function update(string $name, string $email): bool
@@ -36,8 +37,8 @@ class Foo extends db
 
     public function delete()
     {
-         mysqli_query($this->getConnection(), '');
-        return 0;
+        $id = $this->getId();
+         mysqli_query($this->getConnection(), "DELETE FROM users WHERE id=$id");
     }
 
 }

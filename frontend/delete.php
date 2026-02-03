@@ -6,13 +6,13 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Удалить запись
-                    № </h1>
+                    № <?php echo $results['id']; ?></h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                         aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form action="" method="post">
-                    <input type="hidden" name="id" value="">
+                    <input type="hidden" name="id" value="<?php echo $results['id']; ?>">
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                             Закрыть
