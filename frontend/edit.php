@@ -5,7 +5,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Изменить запись</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Изменить запись #<?= $results['id'] ?>?</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                         aria-label="Close"></button>
             </div>
@@ -16,14 +16,14 @@
                     <div class="form-group">
                         <label>
                             <input type="text" class="form-control" name="name"
-                                   value=' '>
+                                   value=' <?= $results['name'] ?> '>
                         </label>
                     </div>
                     <small>Email</small>
                     <div class="form-group">
                         <label>
                             <input type="text" class="form-control"
-                                   name="email" value=' '>
+                                   name="email" value='<?= $results['email'] ?>'>
                         </label>
                     </div>
                     <div class="modal-footer">
