@@ -1,5 +1,5 @@
 <!-- Modal Edit -->
-<div class="modal fade" id="edit<?php echo $results['id']; ?>" tabindex="-1"
+<div class="modal fade" id="edit" tabindex="-1"
      aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog">
@@ -11,19 +11,19 @@
             </div>
             <div class="modal-body">
                 <form action="" method="post">
-                    <input type="hidden" name="id" value="<?php echo $results['id']; ?>">
+                    <input type="hidden" name="id" value="">
                     <small>Имя</small>
                     <div class="form-group">
                         <label>
                             <input type="text" class="form-control" name="name"
-                                   value=' <?php echo $results['name'] ?>'>
+                                   value=' '>
                         </label>
                     </div>
                     <small>Email</small>
                     <div class="form-group">
                         <label>
                             <input type="text" class="form-control"
-                                   name="email" value=' <?php echo $results['email'] ?> '>
+                                   name="email" value=' '>
                         </label>
                     </div>
                     <div class="modal-footer">
