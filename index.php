@@ -5,13 +5,22 @@ use DataBase\Foo;
 
 $foo = new Foo();
 
+$name = $_POST["name"];
+$email = $_POST["email"];
+$id = (int)$_POST["id"];
+
 if(isset($_POST["add"])){
-    $foo->store();
+    $foo->store($name, $email);
 }
 
 if(isset($_POST["edit"])){
-    $foo->update();
+    $foo->update($name, $email);
 }
+
+if(isset($_POST["delete"])){
+    $foo->delete($name, $email);
+}
+
 
 
 $allUsers = $foo->getAll();
@@ -54,14 +63,14 @@ $allUsers = $foo->getAll();
                         <td><?= $results['name'] ?></td>
                         <td><?= $results['email'] ?></td>
                         <td>
-                            <a href="?id=<?= $results['id'] ?>" class="btn btn-success" data-bs-toggle="modal"
-                               data-bs-target="#edit<?=$results['id'] ?>"><i class="fa fa-edit"></i></a>
-                            <a href="" class="btn btn-danger" data-bs-toggle="modal"
-                               data-bs-target="#delete>"><i class="fa fa-trash-alt"></i></a>
+                            <a href="?id=<?php echo $results['id'] ?>" class="btn btn-success" data-bs-toggle="modal"
+                               data-bs-target="#edit<?php echo $results['id'] ?>"><i class="fa fa-edit"></i></a>
+                            <a href="" class="btn btn-danger " data-bs-toggle="modal"
+                               data-bs-target="#delete<?php echo $results['id'] ?>"><i class="fa fa-trash-alt"></i></a>
                         </td>
                     </tr>
-
                     <!-- Модалки для редактирования и удаления -->
+
                     <?php
                     include 'frontend/edit.php';
                     include 'frontend/delete.php';
