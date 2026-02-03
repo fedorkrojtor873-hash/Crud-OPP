@@ -6,11 +6,26 @@ require_once __DIR__ . '/Db.php';
 
 class Foo extends db
 {
+    public function getUsersPaginated(int $limit, int $offset): array
+    {
+        $sql = "SELECT * FROM users ORDER BY id DESC LIMIT $limit OFFSET $offset";
+        $result = mysqli_query($this->getConnection(), $sql);
+        return mysqli_fetch_all($result, MYSQLI_ASSOC);
+    }
+
+    public function countUsers(): int
+    {
+        $result = mysqli_query($this->getConnection(), "SELECT COUNT(*) as total FROM users");
+        $row = mysqli_fetch_assoc($result);
+        return (int)$row['total']; // общее количество записей
+    }
+
     protected function getId()
     {
         $get_id =(int)$_POST['id'];
         return $get_id;
     }
+
     public function getAll(): array
     {
         $result = $this->getConnection()->query("SELECT * FROM users");
