@@ -1,5 +1,5 @@
 <!-- Modal Delete -->
-<div class="modal fade" id="delete" tabindex="-1"
+<div class="modal fade" id="delete<?php echo $results['id']; ?>" tabindex="-1"
      aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog">

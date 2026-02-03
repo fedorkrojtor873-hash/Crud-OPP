@@ -6,9 +6,9 @@ require_once __DIR__ . '/Db.php';
 
 class Foo extends db
 {
-    public function getId()
+    protected function getId()
     {
-        $get_id =$_POST['id'];
+        $get_id =(int)$_POST['id'];
         return $get_id;
     }
     public function getAll(): array
@@ -17,17 +17,27 @@ class Foo extends db
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function store(): string
+    public function store(string $name,  string $email): string
     {
-        $name = $_POST["name"];
-        $email = $_POST["email"];
         return mysqli_query($this->getConnection(), "INSERT INTO users (name, email) VALUES ('$name', '$email')");
     }
-    public function update(): string
+
+    public function update(string $name, string $email): bool
     {
-        $name = $_POST["name"];
-        $email = $_POST["email"];
-        return mysqli_query($this->getConnection(),  'UPDATE users set name = "  ' . $name . '", email = "' . $email . '" WHERE id = ' . $this->getId());
+        $id = $this->getId();
+        //var_dump('id:'.$id, 'name:'.$name, 'email:'.$email);
+        return mysqli_query(
+            $this->getConnection(),
+            "UPDATE users SET name='$name', email='$email' WHERE id=$id"
+        );
+    }
+
+
+
+    public function delete()
+    {
+         mysqli_query($this->getConnection(), '');
+        return 0;
     }
 
 }
